@@ -10,15 +10,15 @@ const botaoCadastrar = document.getElementById("botaoCadastrar")
 
 botaoCadastrar.addEventListener("click", cadastrarMusica)
 
-async function cadastrarMusica(){
-    if(
+async function cadastrarMusica() {
+    if (
         inputTitulo.value === "" ||
         inputArtista.value === "" ||
         inputGenero.value === "" ||
         inputAno.value === "" ||
         inputDuracao.value === ""
-    ){
-        alert("Preecha todos os campos!")
+    ) {
+        alert("Preencha todos os campos!")
         return
     }
 
@@ -32,12 +32,15 @@ async function cadastrarMusica(){
 
     const resposta = await fetch(`${urlBackend}/cadastrar`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(musica)
     })
 
-    const dados = await resposta.json()
-    alert(dados.mensagem)
+    const respostaTransformada = await resposta.json()
 
-    window.Location.href = "index.html"
+    alert(respostaTransformada.mensagem)
+
+    window.location.href = "index.html"
 }
